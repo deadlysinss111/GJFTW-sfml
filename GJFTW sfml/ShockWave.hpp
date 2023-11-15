@@ -8,6 +8,7 @@ class InputManager;
 namespace Maths {
 	float normalizing(sf::Vector2f* vect);
 	void normalized(sf::Vector2f* vect);
+	int getAngle(sf::Vector2f* target);
 }
 
 class ShockWave : public GameObject {

@@ -10,6 +10,7 @@ namespace sf
 
 namespace Maths {
 	float normalizing(sf::Vector2f* vect);
+	int getAngle(sf::Vector2f* target);
 }
 
 class Cannon : public GameObject {

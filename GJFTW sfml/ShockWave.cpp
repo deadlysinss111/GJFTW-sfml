@@ -26,10 +26,11 @@ void ShockWave::calculateBase(sf::Vector2f* direction) {
 }
 
 void ShockWave::rotateShape() {
-	sf::Vector2f baseVect(this->v1.x, 0);
-	float signe = (this->v1.x > 0) ? -1.f : 1.f;
-	std::cout << baseVect.x << "|" << baseVect.y << "|" << this->v1.x << "|" << this->v1.y << std::endl;
-	this->shape->setRotation(90 + signe * 180 * cos(Maths::normalizing(&baseVect) / Maths::normalizing(&this->v1)));
+	sf::Vector2i v1 = sf::Mouse::getPosition();
+	sf::Vector2f v2(0, 0);
+	v2.x = v1.x - window->getSize().x / 2;
+	v2.y = window->getSize().y - v1.y;
+	this->shape->setRotation(Maths::getAngle(&this->v1));
 }
 
 void ShockWave::move(float deltaT) {

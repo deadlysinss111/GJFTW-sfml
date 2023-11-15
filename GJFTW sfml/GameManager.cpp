@@ -125,7 +125,7 @@ void GameManager::scoreSetup() {
 	this->scoreText.setFont(this->fontMap.find("score")->second);
 	this->scoreText.setCharacterSize(50);
 	this->scoreText.setFillColor(sf::Color::White);
-	this->scoreText.setPosition(sf::Vector2f(GetSystemMetrics(SM_CXSCREEN) - 100, 15));
+	this->scoreText.setPosition(sf::Vector2f(window->getSize().x - 100, 15));
 	this->scoreText.setString(std::to_string(this->scoreLogic));
 }
 

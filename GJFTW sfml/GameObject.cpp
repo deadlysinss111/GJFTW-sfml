@@ -16,6 +16,7 @@ GameObject::GameObject(sf::RenderWindow* window, int x, int y, float width, floa
 	this->shape->setOrigin(sf::Vector2f(w / 2, h / 2));
 	this->shape->setPosition(sf::Vector2f(this->x, this->y));
 	this->dead = false;
+	this->window = window;
 }
 
 
