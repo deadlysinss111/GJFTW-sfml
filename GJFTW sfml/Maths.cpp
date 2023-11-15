@@ -25,10 +25,7 @@ void Maths::bounceVectV(sf::Vector2f* vect) {
 }
 
 int Maths::getAngle(sf::Vector2f* target) {
-	sf::Vector2f hyp(0, 0);
-	hyp.x = target->x - GetSystemMetrics(SM_CXSCREEN) / 2;
-	hyp.y = GetSystemMetrics(SM_CYSCREEN) - target->y;
-	sf::Vector2f v2(hyp.x, 0);
-	float signe = (hyp.x > 0) ? -1.f : 1.f;
-	return (90 + signe * 180.f * cos(normalizing(&v2) / normalizing(&hyp)));
+	sf::Vector2f v2(target->x, 0);
+	float signe = (target->x > 0) ? -1.f : 1.f;
+	return (90 + signe * 180.f * cos(normalizing(&v2) / normalizing(target)));
 }
