@@ -1,12 +1,11 @@
-#include <SFML/Graphics.hpp>
-#define NOMINMAX
-#include <Windows.h>
-#include <iostream>
 #include "GameManager.hpp"
 #include "InputManager.hpp"
 #include "GameObject.hpp"
-#include "Cannon.hpp"
-#include "Bullet.hpp"
+
+#define NOMINMAX
+#include <Windows.h>
+#include <iostream>
+#include <SFML/Graphics.hpp>
 
 
 int main(int argc, char** argv)

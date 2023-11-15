@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include <functional>
 #include <SFML/Graphics.hpp>
-#include "Maths.hpp"
 #include "InputManager.hpp"
 #include "Cannon.hpp"
 

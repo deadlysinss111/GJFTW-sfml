@@ -1,7 +1,10 @@
 #pragma once
 #include <unordered_map>
 #include <functional>
+#include <vector>
 #include "SFML/Graphics.hpp"
+
+
 class InputManager {
 public:
 	InputManager(sf::RenderWindow* window);

@@ -1,16 +1,19 @@
 #define NOMINMAX
+
+#include "GameManager.hpp"
+
+#include "InputManager.hpp"
+
+#include "Bullet.hpp"
+#include "Brick.hpp"
+#include "Cannon.hpp"
+#include "ShockWave.hpp"
+
 #include <typeinfo>
 #include <Windows.h>
 #include <fstream>
 #include <iostream>
-#include "GameManager.hpp"
-#include "GameObject.hpp"
-#include "Bullet.hpp"
-#include "Brick.hpp"
-#include "Cannon.hpp"
-#include "InputManager.hpp"
-#include "Maths.hpp"
-#include "ShockWave.hpp"
+#include <functional> 
 
 std::vector<GameObject*> GameManager::objectVector;
 

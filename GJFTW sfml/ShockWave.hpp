@@ -1,8 +1,13 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "GameObject.hpp"
-#include "InputManager.hpp"
-#include "Maths.hpp"
+
+
+class InputManager;
+
+namespace Maths {
+	float normalizing(sf::Vector2f* vect);
+	void normalized(sf::Vector2f* vect);
+}
 
 class ShockWave : public GameObject {
 public:

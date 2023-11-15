@@ -1,10 +1,8 @@
+#include "ShockWave.hpp"
+
 #define NOMINMAX
 #include <Windows.h>
 #include <functional>
-#include <SFML/Graphics.hpp>
-#include "Maths.hpp"
-#include "InputManager.hpp"
-#include "ShockWave.hpp"
 #include <iostream>
 
 

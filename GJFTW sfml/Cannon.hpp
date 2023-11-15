@@ -1,7 +1,16 @@
 #pragma once
 #include "GameObject.hpp"
-#include "InputManager.hpp"
-#include "Maths.hpp"
+
+class InputManager;
+
+namespace sf
+{
+	class RenderWindow; // Demander si utile car fonctionne sans mais permet peut être opti de InputManager.
+}
+
+namespace Maths {
+	float normalizing(sf::Vector2f* vect);
+}
 
 class Cannon : public GameObject {
 public:

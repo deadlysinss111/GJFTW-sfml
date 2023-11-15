@@ -1,6 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+namespace sf
+{
+	class RenderWindow;
+	class Shape;
+}
+class Bullet; // utile ?
+class Brick; //
+class Cannon; //
 
 class GameObject {
 public:

@@ -1,13 +1,22 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+
 #include <vector>
 #include <map>
+#include <string>
 
-class InputManager;
-class GameObject;
-class Bullet;
-class Cannon;
-class Brick;
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+
+class InputManager; // utile ?
+class GameObject; // 
+namespace Maths {
+    void normalized(sf::Vector2f* vect);
+}
+
+namespace sf
+{
+    class RenderWindow; // same
+}
 
 class GameManager {
 public:
