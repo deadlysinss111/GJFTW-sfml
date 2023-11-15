@@ -50,7 +50,7 @@ void InputManager::mouseMapping(sf::Mouse::Button button, std::function<void()> 
 }
 
 void InputManager::moveMapping(std::function<void()> function) {
-    //this->moveEffect.push_back(function);
+    this->moveEffect.push_back(function);
 }
 
 
