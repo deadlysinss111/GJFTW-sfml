@@ -133,8 +133,10 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Cannon.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Houreglass.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maths.cpp" />
@@ -144,8 +146,10 @@
     <ClInclude Include="Brick.hpp" />
     <ClInclude Include="Bullet.hpp" />
     <ClInclude Include="Cannon.hpp" />
+    <ClInclude Include="Collision.hpp" />
     <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="GameObject.hpp" />
+    <ClInclude Include="Houreglass.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Maths.hpp" />
     <ClInclude Include="ShockWave.hpp" />

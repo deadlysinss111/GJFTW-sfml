@@ -6,9 +6,7 @@ namespace sf
 	class RenderWindow;
 	class Shape;
 }
-class Bullet; // utile ?
-class Brick; //
-class Cannon; //
+
 
 class GameObject {
 public:
@@ -22,7 +20,6 @@ public:
 	sf::Shape* shape;
 	virtual bool update(float deltaT, std::vector<GameObject*>* objectVector) { return 0; };
 	void display(sf::RenderWindow* window);
-	void checkCollideRect(GameObject* target, sf::RenderWindow& window) {};
 	virtual void onHit(GameObject* target);
 
 	float x;

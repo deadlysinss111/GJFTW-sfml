@@ -8,6 +8,7 @@
 #include "Brick.hpp"
 #include "Cannon.hpp"
 #include "ShockWave.hpp"
+#include "Houreglass.hpp"
 
 #include <typeinfo>
 #include <Windows.h>
@@ -33,24 +34,31 @@ GameManager::GameManager(InputManager* inputManager, sf::RenderWindow* window) {
 GameManager::~GameManager() {};
 
 bool GameManager::manage(float deltaT) {
-	for (int i = 0; i < this->objectVector.size(); i++) {
-		this->objectVector.at(i)->update(deltaT, &objectVector);
-		this->objectVector.at(i)->display(this->window);
-		if (this->objectVector.at(i)->dead) {
-			if (typeid(*objectVector.at(i)) == typeid(Bullet)) {
-				this->currentBullets -= 1;
-			}
-			else if (typeid(*objectVector.at(i)) == typeid(Brick)){ 
-				this->scoreUpdate(50); 
-			}
-			objectVector.erase(objectVector.begin()+i);
-			if (this->objectVector.size() <= 1) {
-				this->window->draw(this->scoreText);
-				return false;
+	while(deltaT > 0) // on force les tours de boucle en cas de délai trop long entre deux appels de manage
+	{
+		this->bulletCooldown -= deltaT;
+		this->waveCooldown -= deltaT;
+		for (int i = 0; i < this->objectVector.size(); i++) {
+			this->objectVector.at(i)->update(deltaT, &objectVector);
+			this->objectVector.at(i)->display(this->window); // a bouger
+			if (this->objectVector.at(i)->dead) { // on purge la liste de ses objets morts et on active un effet ou non a la mort d'un objet selon son type
+				if (typeid(*objectVector.at(i)) == typeid(Bullet)) {
+					this->currentBullets -= 1;
+					this->scoreUpdate(-20);
+				}
+				else if (typeid(*objectVector.at(i)) == typeid(Brick)) {
+					this->scoreUpdate(50);
+				}
+				objectVector.erase(objectVector.begin() + i);
+				if (this->objectVector.size() <= 1) { // terrifiant, a changer asap
+					this->window->draw(this->scoreText);
+					return false;
+				}
 			}
 		}
+		this->window->draw(this->scoreText);
+		deltaT -= 0.1;
 	}
-	this->window->draw(this->scoreText);
 	return true;
 }
 
@@ -59,10 +67,9 @@ void GameManager::insert(GameObject* object){
 }
 
 void GameManager::shoot() {
-	if(this->currentBullets < this->maxBullets)
+	if(this->currentBullets < this->maxBullets && this->bulletCooldown <= 0)
 	{
 		Bullet* bullet = new Bullet(this->window, this->window->getSize().x / 2, this->window->getSize().y);
-		//Bullet* bullet = new Bullet(this->inputManager, this->window, 200, 200);
 		sf::Vector2f mouseVect(sf::Vector2f(sf::Mouse::getPosition().x - bullet->x, sf::Mouse::getPosition().y - bullet->y));
 		Maths::normalized(&mouseVect);
 		mouseVect.x *= 500;
@@ -70,44 +77,39 @@ void GameManager::shoot() {
 		bullet->setVelocity(&mouseVect);
 		this->objectVector.push_back(bullet);
 		this->currentBullets++;
+		this->bulletCooldown = 1;
 	}
 }
 
 void GameManager::wave() {
-	sf::Vector2f mousePosition(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
-	ShockWave* wave = new ShockWave(this->window, &mousePosition);
-	this->objectVector.push_back(wave);
+	if(this->waveCooldown <= 0){
+		sf::Vector2f mousePosition(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
+		ShockWave* wave = new ShockWave(this->window, &mousePosition, 0.55);
+		this->objectVector.push_back(wave);
+		Houreglass* houreglass = new Houreglass(this->window, 0, window->getSize().y, 50, 200, 2.5);
+		this->objectVector.push_back(houreglass);
+		waveCooldown = 2.5;
+	}
 }
 
-void GameManager::setup() {
+void GameManager::setup() { // setup du niveau selon un fichier texte
 	std::ifstream level;
 	level.open("assets/level files/test.txt");
 	if (level.is_open()) {
-		std::string polf;
-		level >> polf;
+		std::string strLvl;
+		level >> strLvl;
 
 		Cannon* cannon = new Cannon(this->inputManager, this->window);
 		this->objectVector.push_back(cannon);
 
-		for (int i = 0; i < polf.size(); i++) {
-			if (polf[i] != '0' ) {
-				int j = polf[i] - '0';
+		for (int i = 0; i < strLvl.size(); i++) {
+			if (strLvl[i] != '0' ) {
+				int j = strLvl[i] - '0';
 				Brick* brick = new Brick(this->window, i%15, i / 15, j);
 				this->objectVector.push_back(brick);
 			}
 		}
-
-		/*for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 5; j++) {
-				for (int k = 0; k < 15; k++) {
-
-					Brick* brick = new Brick(this->window, k, j + 5 * i, 3 - i);
-					this->objectVector.push_back(brick);
-				}
-			}
-		}*/
 	}
-	else { std::cout << "flop"; }
 	
 }
 

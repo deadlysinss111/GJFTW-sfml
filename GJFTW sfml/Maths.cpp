@@ -1,5 +1,5 @@
 #include "Maths.hpp"
-#include<iostream>
+#include <iostream>
 
 
 float Maths::normalizing(sf::Vector2f* vect) {

@@ -32,6 +32,8 @@ public:
     int currentBullets;
     sf::Text scoreText;
     int scoreLogic;
+    float bulletCooldown;
+    float waveCooldown;
 
     bool manage(float deltaT);
     void insert(GameObject* object);

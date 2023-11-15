@@ -4,6 +4,7 @@
 #include "Bullet.hpp"
 #include "Cannon.hpp"
 #include "Brick.hpp"
+#include "Collision.hpp"
 
 
 Bullet::Bullet(sf::RenderWindow* window, int x, int y) : GameObject(window, x, y, 25) {
@@ -20,37 +21,7 @@ void Bullet::move(float deltaT) {
     this->shape->setPosition(x, y);
 }
 
-bool Bullet::checkCollideRect(GameObject* target) {
-    if(target != this){
-        if (this->x + this->w > 0 && this->x < this->window->getSize().x && this->y + this->h > 0 && this->y < this->window->getSize().y) {
-            if (this->x < target->x + target->w && this->x + this->w > target->x && this->y < target->y + target->h && this->y + this->h > target->y) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
-bool Bullet::checkCollideCircleRect(GameObject* target) {
-    if (typeid(*target) == typeid(Bullet) || typeid(*target) == typeid(Cannon)) { return false; }
-    float disatanceX = std::abs(this->x - target->x);
-    float disatanceY = std::abs(this->y - target->y);
-    if (disatanceX > (target->w / 2 + this->h)) { return false; }
-    if (disatanceY > (target->h / 2 + this->h)) { return false; }
-    if (disatanceX <= (target->w / 2)) { return true; }
-    if (disatanceY <= (target->h / 2)) { return true; }
-    auto cornerDistance_sq = (disatanceX - target->w / 2) * (disatanceX - target->w / 2) + (disatanceY - target->h / 2) * (disatanceY - target->h / 2);
-
-    return (cornerDistance_sq <= (this->h * this->h));
-}
-
-bool Bullet::checkCollideCircle(GameObject* target) {
-    float distanceX = std::abs(this->x - target->x);
-    float distanceY = std::abs(this->y - target->y);
-    float distance = sqrt(distanceX*distanceX + distanceY * distanceY);
-    if ((this->w + target->w) >= distance) { return true; }
-    return false;
-}
 
 void Bullet::collideEffect(GameObject* target) {
     float targetXMax = target->x + target->w;
@@ -104,14 +75,14 @@ bool Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){
     for (int i = 0; i < objectVector->size(); i++) {
         auto target = objectVector->at(i);
         if (typeid(*target) == typeid(Brick)) {
-            if(this->checkCollideCircleRect(target)) {
+            if(Collision::circleToRect(this, target)) {
                 this->collideEffect(target);
             }
         }
         else if (typeid(*target) == typeid(Bullet)) {
             if(target != this)
             {
-                if (this->checkCollideCircle(target)) {
+                if (Collision::circleToCircle(this, target)) {
                     this->collideEffect(target);
                 }
             }
