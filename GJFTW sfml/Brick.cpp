@@ -17,8 +17,7 @@ Brick::Brick(sf::RenderWindow* window, int x, int y, int hp) : GameObject(window
 
 Brick::~Brick() {};
 
-bool Brick::update(float deltaT, std::vector<GameObject*>* objectVector){
-	return 0;
+void Brick::update(float deltaT, std::vector<GameObject*>* objectVector){
 }
 
 void Brick::onHit(GameObject* target) {

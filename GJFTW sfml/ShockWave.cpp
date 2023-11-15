@@ -1,6 +1,7 @@
 #include "ShockWave.hpp"
 #include "Collision.hpp"
 #include "Bullet.hpp"
+#include "Cannon.hpp"
 
 #define NOMINMAX
 #include <Windows.h>
@@ -39,35 +40,39 @@ void ShockWave::move(float deltaT) {
 	this->shape->setPosition(x, y);
 }
 
-bool ShockWave::update(float deltaT, std::vector<GameObject*>* objectVector) {
+void ShockWave::update(float deltaT, std::vector<GameObject*>* objectVector) {
 	this->move(deltaT);
+
 	for (int i = 0; i < objectVector->size(); i++) {
 		auto target = objectVector->at(i);
+
 		if (typeid(*target) == typeid(Bullet) && !std::count(this->collidedObjects.begin(), this->collidedObjects.end(), target)) {
-			
-			if (Collision::circleToRect(target, this)) {
-				target->velocity = -target->velocity;
-				this->collidedObjects.push_back(target);
-			}
+			// Appel de la fonction circleToRect
+			circleToRect(this, target);
 		}
 	}
+
 	this->lifespan -= deltaT;
 	if (this->lifespan <= 0) {
 		this->dead = true;
 	}
-	return 0;
 }
 
-#include "Cannon.hpp"
 
-bool ShockWave::circleToRect(GameObject* objOne, GameObject* objTwo) {
-	if (typeid(*objTwo) == typeid(Bullet) || typeid(*objTwo) == typeid(Cannon)) { return false; }
-	float disatanceX = std::abs(objOne->x - objTwo->x);
-	float disatanceY = std::abs(objOne->y - objTwo->y);
-	if (disatanceX > (objTwo->w / 2 + objOne->h) || disatanceY > (objTwo->h / 2 + objOne->h)) { return false; }
-	if (disatanceX <= (objTwo->w / 2) || disatanceY <= (objTwo->h / 2)) { return true; }
-
-	auto cornerDistance_sq = (disatanceX - objTwo->w / 2) * (disatanceX - objTwo->w / 2) + (disatanceY - objTwo->h / 2) * (disatanceY - objTwo->h / 2);
-
-	return (cornerDistance_sq <= (objOne->h * objOne->h));
+void ShockWave::circleToRect(GameObject* objOne, GameObject* objTwo) {
+	if (typeid(*objTwo) == typeid(Bullet) || typeid(*objTwo) == typeid(Cannon)) { return; }
+	float distanceX = std::abs(objOne->x - objTwo->x);
+	float distanceY = std::abs(objOne->y - objTwo->y);
+	if (distanceX > (objTwo->w / 2 + objOne->h) || distanceY > (objTwo->h / 2 + objOne->h)) { return; }
+	if (distanceX <= (objTwo->w / 2) || distanceY <= (objTwo->h / 2)) {
+		objTwo->velocity = -objTwo->velocity;
+		this->collidedObjects.push_back(objTwo);
+	}
+	else {
+		auto cornerDistance_sq = (distanceX - objTwo->w / 2) * (distanceX - objTwo->w / 2) + (distanceY - objTwo->h / 2) * (distanceY - objTwo->h / 2);
+		if (cornerDistance_sq <= (objOne->h * objOne->h)) {
+			objTwo->velocity = -objTwo->velocity;
+			this->collidedObjects.push_back(objTwo);
+		}
+	}
 }

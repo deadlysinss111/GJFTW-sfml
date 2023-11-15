@@ -70,27 +70,33 @@ void Bullet::setVelocity(sf::Vector2f* v1) {
     this->velocity = *v1;
 }
 
-bool Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){
+void Bullet::update(float deltaT, std::vector<GameObject*>* objectVector) {
     this->move(deltaT);
+
+    bool collisionResult = false;
+
     for (int i = 0; i < objectVector->size(); i++) {
         auto target = objectVector->at(i);
+
         if (typeid(*target) == typeid(Brick)) {
-            if(Collision::circleToRect(this, target)) {
+            Collision::circleToRect(this, target);
+            if (collisionResult) {
                 this->collideEffect(target);
             }
         }
         else if (typeid(*target) == typeid(Bullet)) {
-            if(target != this)
-            {
-                if (Collision::circleToCircle(this, target)) {
+            if (target != this) {
+                Collision::circleToCircle(this, target);
+                if (collisionResult) {
                     this->collideEffect(target);
                 }
             }
         }
     }
+
     this->adjustPosition();
-    return 1;
 }
+
 
 void Bullet::onHit(GameObject* target) {
     sf::Vector2f vect(-target->velocity.x, -target->velocity.y);

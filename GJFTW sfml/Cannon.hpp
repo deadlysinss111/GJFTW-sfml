@@ -18,6 +18,6 @@ public:
 	Cannon(InputManager* inputManager, sf::RenderWindow* window);
 	~Cannon();
 	
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector) override;
 	void rotate();
 };

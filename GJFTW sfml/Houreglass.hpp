@@ -18,6 +18,6 @@ public:
 	float meltingSpeed;
 	float remainingLife;
 
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector) override;
 	void melt(float deltaT);
 };

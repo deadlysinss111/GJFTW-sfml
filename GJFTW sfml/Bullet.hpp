@@ -6,7 +6,7 @@ class Bullet : public GameObject {
 public:
 	Bullet(sf::RenderWindow* window, int x, int y);
 	~Bullet();
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector) override;
 
 	void move(float deltaT);
 	void setVelocity(sf::Vector2f* vect);

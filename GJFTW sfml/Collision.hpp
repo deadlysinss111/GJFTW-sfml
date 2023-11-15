@@ -2,7 +2,8 @@
 class GameObject;
 
 namespace Collision {
-	bool rectToRect(GameObject* objOne, GameObject* objTwo);
-	bool circleToRect(GameObject* objOne, GameObject* objTwo);
-	bool circleToCircle(GameObject* objOne, GameObject* objTwo);
+    extern bool collisionResult;
+    void rectToRect(GameObject* objOne, GameObject* objTwo);
+    void circleToRect(GameObject* objOne, GameObject* objTwo);
+    void circleToCircle(GameObject* objOne, GameObject* objTwo);
 }

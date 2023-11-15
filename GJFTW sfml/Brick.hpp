@@ -9,6 +9,6 @@ public:
 	int hp;
 	static std::map<int, sf::Color> colorMap;
 
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector) override;
 	void onHit(GameObject* target);
 };

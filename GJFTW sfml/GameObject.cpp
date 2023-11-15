@@ -42,3 +42,6 @@ void GameObject::display(sf::RenderWindow* window) {
 
 void GameObject::onHit(GameObject* target) {
 }
+
+void GameObject::update(float deltaT, std::vector<GameObject*>* objectVector) {
+}

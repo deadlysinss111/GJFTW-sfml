@@ -26,11 +26,10 @@ void Houreglass::melt(float deltaT) {
 	this->shape->setPosition(this->x, this->y);
 }
 
-bool Houreglass::update(float deltaT, std::vector<GameObject*>* objectVector) {
+void Houreglass::update(float deltaT, std::vector<GameObject*>* objectVector) {
 	this->melt(deltaT);
 	if (this->lifespan <= 0) {
-		this->dead = 1;
+		this->dead = true;
 	}
-	return 0;
 }
 

@@ -21,9 +21,9 @@ public:
 	float lifespan;
 	std::vector<GameObject*> collidedObjects;
 
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector) override;
 	void calculateBase(sf::Vector2f*);
 	void rotateShape();
 	void move(float deltaT);
-	bool circleToRect(GameObject* objOne, GameObject* objTwo);
+	void circleToRect(GameObject* objOne, GameObject* objTwo);
 };
