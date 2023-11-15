@@ -22,7 +22,7 @@ void Cannon::rotate(){
 	sf::Vector2f v2(hyp.x, 0);
 	float signe = (hyp.x > 0) ? -1.f : 1.f;
 
-	this->shape->setRotation(90 + signe * 180.f * cos(Maths::normalizing(&v2) / Maths::normalizing(&hyp)));
+	this->shape->setRotation(Maths::getAngle(&this->v1));;
 	// on doit établir le projeté orthogonal de vect sur la droite qui passe par l'origine dirigée par le vecteur (1, 0)
 	// de là on a un triangle rectangle dont on connait deux cotés => trigo pour trouver l'angle et c'est gagné
 }

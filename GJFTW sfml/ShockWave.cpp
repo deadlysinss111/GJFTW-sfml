@@ -24,9 +24,8 @@ void ShockWave::calculateBase(sf::Vector2f* direction) {
 
 void ShockWave::rotateShape() {
 	sf::Vector2f baseVect(this->v1.x, 0);
-	//std::cout << this->v2.x << "||" << this->v2.y << std::endl;
 	float signe = (this->v1.x > 0) ? -1.f : 1.f;
-	this->shape->setRotation(90 + signe * 180 * cos(Maths::normalizing(&baseVect) / Maths::normalizing(&this->v1)));
+	this->shape->setRotation(Maths::getAngle(&this->v2));
 }
 
 bool ShockWave::update(float deltaT, std::vector<GameObject*>* objectVector) {
