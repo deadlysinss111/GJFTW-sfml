@@ -10,6 +10,4 @@ public:
 	
 	bool update(float deltaT, std::vector<GameObject*>* objectVector);
 	void rotate();
-private:
-	InputManager* inputManager;
 };

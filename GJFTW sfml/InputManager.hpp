@@ -2,6 +2,8 @@
 #include <unordered_map>
 #include <functional>
 #include "SFML/Graphics.hpp"
+#include <vector>
+
 class InputManager {
 public:
 	InputManager(sf::RenderWindow* window);
