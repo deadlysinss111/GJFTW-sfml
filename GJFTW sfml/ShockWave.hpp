@@ -16,14 +16,19 @@ public:
 	ShockWave(sf::RenderWindow* window, sf::Vector2f* direction, float lifespan);
 	~ShockWave();
 
-	sf::Vector2f v1;
-	sf::Vector2f v2;
-	float lifespan;
-	std::vector<GameObject*> collidedObjects;
+private:
 
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
 	void calculateBase(sf::Vector2f*);
 	void rotateShape();
 	void move(float deltaT);
+
+	bool update(float deltaT, std::vector<GameObject*>* objectVector);
 	bool circleToRect(GameObject* objOne, GameObject* objTwo);
+
+	std::vector<GameObject*> collidedObjects;
+
+	sf::Vector2f v1;
+	sf::Vector2f v2;
+
+	float lifespan;
 };

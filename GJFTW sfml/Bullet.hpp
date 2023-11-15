@@ -6,12 +6,16 @@ class Bullet : public GameObject {
 public:
 	Bullet(sf::RenderWindow* window, int x, int y);
 	~Bullet();
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+
+	void setVelocity(sf::Vector2f* vect);
+
+private:
 
 	void move(float deltaT);
-	void setVelocity(sf::Vector2f* vect);
 	void adjustPosition();
 	void onHit(GameObject* target);
 	void collideEffect(GameObject*);
+
+	bool update(float deltaT, std::vector<GameObject*>* objectVector);
 
 };

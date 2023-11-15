@@ -15,19 +15,20 @@ public:
 	GameObject();
 	~GameObject();
 
-	
-	sf::RenderWindow* window;
-	sf::Shape* shape;
-	virtual bool update(float deltaT, std::vector<GameObject*>* objectVector) { return 0; };
-	void display(sf::RenderWindow* window);
 	virtual void onHit(GameObject* target);
+	virtual bool update(float deltaT, std::vector<GameObject*>* objectVector) { return 0; };
+
+	void display(sf::RenderWindow* window);
+
+	sf::Shape* shape;
+	sf::RenderWindow* window;
+
+	sf::Vector2f velocity;
+
+	bool dead;
 
 	float x;
 	float y;
 	float h;
 	float w;
-	bool dead;
-	
-	sf::Vector2f velocity;
-	
 };

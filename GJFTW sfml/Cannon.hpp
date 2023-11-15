@@ -17,7 +17,9 @@ class Cannon : public GameObject {
 public:
 	Cannon(InputManager* inputManager, sf::RenderWindow* window);
 	~Cannon();
-	
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+private:
+
 	void rotate();
+
+	bool update(float deltaT, std::vector<GameObject*>* objectVector);
 };

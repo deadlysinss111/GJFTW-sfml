@@ -24,18 +24,10 @@ public:
     GameManager(InputManager* inputManager, sf::RenderWindow* window);
     ~GameManager();
 
-    InputManager* inputManager;
-    sf::RenderWindow* window;
-    static std::vector<GameObject*> objectVector;
-    static std::map<std::string, sf::Font> fontMap;
-    int maxBullets;
-    int currentBullets;
-    sf::Text scoreText;
-    int scoreLogic;
-    float bulletCooldown;
-    float waveCooldown;
-
     bool manage(float deltaT);
+
+private:
+
     void insert(GameObject* object);
     void shoot();
     void wave();
@@ -44,4 +36,18 @@ public:
     void scoreSetup();
     void scoreUpdate(int value);
 
+    InputManager* inputManager;
+    sf::RenderWindow* window;
+
+    static std::vector<GameObject*> objectVector;
+    static std::map<std::string, sf::Font> fontMap;
+
+    sf::Text scoreText;
+
+    float bulletCooldown;
+    float waveCooldown;
+
+    int scoreLogic;
+    int maxBullets;
+    int currentBullets;
 };
