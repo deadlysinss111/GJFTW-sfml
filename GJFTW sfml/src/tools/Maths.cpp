@@ -1,9 +1,10 @@
 #include "Maths.hpp"
-#include<iostream>
+#include <iostream>
 #define NOMINMAX
 #include <Windows.h>
 #include <functional>
 
+#include <SFML/Graphics.hpp>
 
 float Maths::normalizing(sf::Vector2f* vect) {
 	float norm = std::sqrt(vect->x * vect->x + vect->y * vect->y);

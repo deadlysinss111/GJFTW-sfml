@@ -10,6 +10,8 @@
 #include "ShockWave.hpp"
 #include "Houreglass.hpp"
 
+#include "Maths.hpp"
+
 #include <typeinfo>
 #include <Windows.h>
 #include <fstream>
@@ -35,14 +37,14 @@ GameManager::GameManager(InputManager* inputManager, sf::RenderWindow* window) {
 GameManager::~GameManager() {};
 
 bool GameManager::manage(float deltaT) {
-	while(deltaT > 0) // on force les tours de boucle en cas de délai trop long entre deux appels de manage
+	while(deltaT > 0) // On force les tours de boucle en cas de délai trop long entre deux appels de manage
 	{
 		this->bulletCooldown -= deltaT;
 		this->waveCooldown -= deltaT;
 		for (int i = 0; i < this->objectVector.size(); i++) {
 			this->objectVector.at(i)->update(deltaT, &objectVector);
-			this->objectVector.at(i)->display(this->window); // a bouger
-			if (this->objectVector.at(i)->dead) { // on purge la liste de ses objets morts et on active un effet ou non a la mort d'un objet selon son type
+			this->objectVector.at(i)->display(this->window);
+			if (this->objectVector.at(i)->dead) { // On purge la liste de ses objets morts et on active un effet ou non à la mort d'un objet selon son type
 				if (typeid(*objectVector.at(i)) == typeid(Bullet)) {
 					this->currentBullets -= 1;
 					this->scoreUpdate(-20);
@@ -51,7 +53,7 @@ bool GameManager::manage(float deltaT) {
 					this->scoreUpdate(50);
 				}
 				objectVector.erase(objectVector.begin() + i);
-				if (this->objectVector.size() <= 1) { // terrifiant, a changer asap
+				if (this->objectVector.size() <= 1) { //////////////////////////////////////// terrifiant, a changer asap
 					this->window->draw(this->scoreText);
 					return false;
 				}
@@ -68,21 +70,21 @@ void GameManager::insert(GameObject* object){
 }
 
 void GameManager::shoot() {
-	if(this->currentBullets < this->maxBullets && this->bulletCooldown <= 0)
+	if(this->currentBullets < this->maxBullets && this->bulletCooldown <= 0) // Max 2 balles et cd entre deux tire
 	{
 		Bullet* bullet = new Bullet(this->window, this->window->getSize().x / 2, this->window->getSize().y + 40);
 		sf::Vector2f mouseVect(sf::Vector2f(sf::Mouse::getPosition().x - bullet->x, sf::Mouse::getPosition().y - bullet->y));
 		Maths::normalized(&mouseVect);
 		mouseVect.x *= 500;
 		mouseVect.y *= 500;
-		bullet->setVelocity(&mouseVect);
+		bullet->setVelocity(&mouseVect); // Vitesse bullet
 		this->objectVector.push_back(bullet);
 		this->currentBullets++;
 		this->bulletCooldown = 1;
 	}
 }
 
-void GameManager::wave() {
+void GameManager::wave() { // Gestion onde de choc
 	if(this->waveCooldown <= 0){
 		sf::Vector2f mousePosition(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 		ShockWave* wave = new ShockWave(this->window, &mousePosition, 0.55);
@@ -114,7 +116,7 @@ void GameManager::setup() { // setup du niveau selon un fichier texte
 		Cannon* cannon = new Cannon(this->inputManager, this->window);
 		this->objectVector.push_back(cannon);
 
-		for (int i = 0; i < strLvl.size(); i++) {
+		for (int i = 0; i < strLvl.size(); i++) { // Taille de la map '0' représente le vide entre les briques
 			if (strLvl[i] != '0' ) {
 				int j = strLvl[i] - '0';
 				Brick* brick = new Brick(this->window, i%15, i / 15, j);
@@ -130,11 +132,11 @@ void GameManager::addFont(std::string name, const char* path) {
 	this->fontMap.insert({ name, font });
 }
 
-void GameManager::scoreSetup() {
+void GameManager::scoreSetup() { // Score + si brique est cassée - si bullet disparaît
 	this->addFont(std::string("score"), "src/assets/fonts/arial.ttf");
 	this->scoreLogic = 0;
 	this->scoreText.setFont(this->fontMap.find("score")->second);
-	this->scoreText.setCharacterSize(50);
+	this->scoreText.setCharacterSize(50); // Initialise 50 score de départ
 	this->scoreText.setFillColor(sf::Color::White);
 	this->scoreText.setPosition(sf::Vector2f(window->getSize().x - 100, 15));
 	this->scoreText.setString(std::to_string(this->scoreLogic));

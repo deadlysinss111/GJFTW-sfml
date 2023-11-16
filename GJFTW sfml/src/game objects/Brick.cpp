@@ -1,6 +1,5 @@
 #define NOMINMAX
 #include <windows.h>
-#include <iostream>
 #include "Brick.hpp"
 
 
@@ -17,7 +16,7 @@ Brick::~Brick() {};
 void Brick::update(float deltaT, std::vector<GameObject*>* objectVector){
 }
 
-void Brick::onHit(GameObject* target) {
+void Brick::onHit(GameObject* target) { // Perte de point de vie si impact et changement de couleur si hit
 	this->hp -= 1;
 	if (hp == 0) {
 		this->dead = true;

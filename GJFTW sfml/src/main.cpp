@@ -11,8 +11,7 @@
 int main(int argc, char** argv)
 {
     sf::RenderWindow window(sf::VideoMode(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)), "SFML");
-    //sf::RenderWindow window(sf::VideoMode(640, 480), "SFML");
-    InputManager inputManager(&window); // demander a Peter si c'est une bonne pratique de tout link des le départ plutot que de repasser tout en argument a chaque appels
+    InputManager inputManager(&window);
     sf::Clock clock;
     GameManager gameManager(&inputManager, &window);
 
@@ -22,7 +21,7 @@ int main(int argc, char** argv)
     {
         window.clear();
 
-        sf::Event event;
+        sf::Event event; 
 
         sf::Time elapsed = clock.restart();
 

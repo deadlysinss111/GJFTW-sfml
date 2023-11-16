@@ -8,15 +8,12 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-class InputManager; // utile ?
-class GameObject; // 
-namespace Maths {
-    void normalized(sf::Vector2f* vect);
-}
+class InputManager;
+class GameObject;
 
 namespace sf
 {
-    class RenderWindow; // same
+    class RenderWindow;
 }
 
 class GameManager {

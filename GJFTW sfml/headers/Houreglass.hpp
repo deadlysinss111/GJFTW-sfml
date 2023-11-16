@@ -4,11 +4,6 @@
 
 class InputManager;
 
-namespace Maths {
-	float normalizing(sf::Vector2f* vect);
-	void normalized(sf::Vector2f* vect);
-}
-
 class Houreglass : public GameObject {
 public:
 	Houreglass(sf::RenderWindow* window, int x, int y, int w, int h, float lifespan);

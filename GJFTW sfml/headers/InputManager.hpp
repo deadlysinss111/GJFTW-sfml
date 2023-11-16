@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <functional>
 #include <vector>
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 
 
 class InputManager {

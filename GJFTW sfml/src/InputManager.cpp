@@ -1,6 +1,6 @@
 #include "InputManager.hpp"
 
-InputManager::InputManager(sf::RenderWindow* window) {
+InputManager::InputManager(sf::RenderWindow* window) { // Gestion des touches et cliques
     this->window = window;
 }
 
