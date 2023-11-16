@@ -16,7 +16,7 @@ public:
 	~GameObject();
 
 	virtual void onHit(GameObject* target);
-	virtual bool update(float deltaT, std::vector<GameObject*>* objectVector) { return 0; };
+	virtual void update(float deltaT, std::vector<GameObject*>* objectVector) {};
 
 	void display(sf::RenderWindow* window);
 

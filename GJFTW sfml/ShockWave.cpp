@@ -26,10 +26,6 @@ void ShockWave::calculateBase(sf::Vector2f* direction) {
 }
 
 void ShockWave::rotateShape() {
-	sf::Vector2i v1 = sf::Mouse::getPosition();
-	sf::Vector2f v2(0, 0);
-	v2.x = v1.x - window->getSize().x / 2;
-	v2.y = window->getSize().y - v1.y;
 	this->shape->setRotation(Maths::getAngle(&this->v1));
 }
 
@@ -39,7 +35,7 @@ void ShockWave::move(float deltaT) {
 	this->shape->setPosition(x, y);
 }
 
-bool ShockWave::update(float deltaT, std::vector<GameObject*>* objectVector) {
+void ShockWave::update(float deltaT, std::vector<GameObject*>* objectVector) {
 	this->move(deltaT);
 	for (int i = 0; i < objectVector->size(); i++) {
 		auto target = objectVector->at(i);
@@ -55,7 +51,6 @@ bool ShockWave::update(float deltaT, std::vector<GameObject*>* objectVector) {
 	if (this->lifespan <= 0) {
 		this->dead = true;
 	}
-	return 0;
 }
 
 #include "Cannon.hpp"

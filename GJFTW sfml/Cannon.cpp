@@ -22,14 +22,11 @@ void Cannon::rotate(){
 	int xScreen = window->getSize().x;
 	v2.x = v1.x - xScreen / 2;
 	v2.y = window->getSize().y - v1.y;
-	std::cout << v2.x << std::endl;
-	std::cout << v2.y << std::endl;
 	this->shape->setRotation(Maths::getAngle(&v2));
 	// on doit établir le projeté orthogonal de vect sur la droite qui passe par l'origine dirigée par le vecteur (1, 0)
 	// de là on a un triangle rectangle dont on connait deux cotés => trigo pour trouver l'angle et c'est gagné
 }
 
-bool Cannon::update(float deltaT, std::vector<GameObject*>* objectVector) {
-	return 0;
+void Cannon::update(float deltaT, std::vector<GameObject*>* objectVector) {
 }
 

@@ -16,6 +16,6 @@ private:
 	void onHit(GameObject* target);
 	void collideEffect(GameObject*);
 
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector);
 
 };

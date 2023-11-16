@@ -8,7 +8,7 @@ public:
 private:
 
 	void onHit(GameObject* target);
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector);
 
 	int hp;
 

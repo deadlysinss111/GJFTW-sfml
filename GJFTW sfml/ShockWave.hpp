@@ -22,7 +22,7 @@ private:
 	void rotateShape();
 	void move(float deltaT);
 
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector);
 	bool circleToRect(GameObject* objOne, GameObject* objTwo);
 
 	std::vector<GameObject*> collidedObjects;

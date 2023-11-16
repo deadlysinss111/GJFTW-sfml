@@ -70,7 +70,7 @@ void Bullet::setVelocity(sf::Vector2f* v1) {
     this->velocity = *v1;
 }
 
-bool Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){
+void Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){
     this->move(deltaT);
     for (int i = 0; i < objectVector->size(); i++) {
         auto target = objectVector->at(i);
@@ -89,7 +89,6 @@ bool Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){
         }
     }
     this->adjustPosition();
-    return 1;
 }
 
 void Bullet::onHit(GameObject* target) {

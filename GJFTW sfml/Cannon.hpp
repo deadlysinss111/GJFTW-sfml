@@ -21,5 +21,5 @@ private:
 
 	void rotate();
 
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector);
 };

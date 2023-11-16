@@ -17,7 +17,7 @@ private:
 
 	void melt(float deltaT);
 
-	bool update(float deltaT, std::vector<GameObject*>* objectVector);
+	void update(float deltaT, std::vector<GameObject*>* objectVector);
 
 	float lifespan;
 	float meltingSpeed;
