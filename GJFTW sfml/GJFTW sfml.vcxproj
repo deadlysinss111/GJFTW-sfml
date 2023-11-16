@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\game objects\BoundingBrick.cpp" />
     <ClCompile Include="src\game objects\Brick.cpp" />
     <ClCompile Include="src\game objects\Bullet.cpp" />
     <ClCompile Include="src\game objects\Cannon.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="src\game objects\ShockWave.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\BoundingBrick.hpp" />
     <ClInclude Include="headers\Brick.hpp" />
     <ClInclude Include="headers\Bullet.hpp" />
     <ClInclude Include="headers\Cannon.hpp" />

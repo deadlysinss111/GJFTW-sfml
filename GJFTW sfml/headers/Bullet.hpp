@@ -15,6 +15,7 @@ private:
 	void adjustPosition();
 	void onHit(GameObject* target);
 	void collideEffect(GameObject*);
+	void collideBoundEffect(GameObject*);
 
 	void update(float deltaT, std::vector<GameObject*>* objectVector);
 	void display(sf::RenderWindow* window);

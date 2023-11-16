@@ -51,6 +51,9 @@
     <ClCompile Include="src\game objects\ShockWave.cpp">
       <Filter>Fichiers sources\game object</Filter>
     </ClCompile>
+    <ClCompile Include="src\game objects\BoundingBrick.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Brick.hpp">
@@ -81,6 +84,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="headers\Houreglass.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BoundingBrick.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

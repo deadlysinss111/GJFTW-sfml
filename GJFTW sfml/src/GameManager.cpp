@@ -9,6 +9,7 @@
 #include "Cannon.hpp"
 #include "ShockWave.hpp"
 #include "Houreglass.hpp"
+#include "BoundingBrick.hpp"
 
 #include "Maths.hpp"
 
@@ -37,42 +38,38 @@ GameManager::GameManager(InputManager* inputManager, sf::RenderWindow* window) {
 GameManager::~GameManager() {};
 
 bool GameManager::manage(float deltaT) {
-	while(deltaT > 0) // On force les tours de boucle en cas de délai trop long entre deux appels de manage
-	{
-		this->bulletCooldown -= deltaT;
-		this->waveCooldown -= deltaT;
-		for (int i = 0; i < this->objectVector.size(); i++) {
-			this->objectVector.at(i)->update(deltaT, &objectVector);
-			this->objectVector.at(i)->display(this->window);
-			if (this->objectVector.at(i)->dead) { // On purge la liste de ses objets morts et on active un effet ou non à la mort d'un objet selon son type
-				if (typeid(*objectVector.at(i)) == typeid(Bullet)) {
-					this->currentBullets -= 1;
-					this->scoreUpdate(-20);
-				}
-				else if (typeid(*objectVector.at(i)) == typeid(Brick)) {
-					this->scoreUpdate(50);
-					int skip = 0;
-					for (int j = 0; j < this->objectVector.size(); j++) {
-						if (typeid(*objectVector.at(j)) == typeid(Brick)) {
-							skip +=1;
-						}
-					}
-					
-					if(skip <= 2){
-						this->scoreText.setPosition(this->window->getSize().x / 2 - 400, this->window->getSize().y / 2 - 150);
-						this->scoreText.setScale(4, 4);
-						this->window->draw(this->scoreText);
-						this->window->display();
-						Sleep(2000);
-						return false;
-					}
-				}
-				objectVector.erase(objectVector.begin() + i);
+	this->bulletCooldown -= deltaT;
+	this->waveCooldown -= deltaT;
+	for (int i = 0; i < this->objectVector.size(); i++) {
+		this->objectVector.at(i)->update(deltaT, &objectVector);
+		this->objectVector.at(i)->display(this->window);
+		if (this->objectVector.at(i)->dead) { // On purge la liste de ses objets morts et on active un effet ou non à la mort d'un objet selon son type
+			if (typeid(*objectVector.at(i)) == typeid(Bullet)) {
+				this->currentBullets -= 1;
+				this->scoreUpdate(-20);
 			}
+			else if (typeid(*objectVector.at(i)) == typeid(Brick)) {
+				this->scoreUpdate(50);
+				int skip = 0;
+				for (int j = 0; j < this->objectVector.size(); j++) {
+					if (typeid(*objectVector.at(j)) == typeid(Brick)) {
+						skip +=1;
+					}
+				}
+					
+				if(skip <= 2){
+					this->scoreText.setPosition(this->window->getSize().x / 2 - 400, this->window->getSize().y / 2 - 150);
+					this->scoreText.setScale(4, 4);
+					this->window->draw(this->scoreText);
+					this->window->display();
+					Sleep(2000);
+					return false;
+				}
+			}
+			objectVector.erase(objectVector.begin() + i);
 		}
-		this->window->draw(this->scoreText);
-		deltaT -= 0.1;
 	}
+	this->window->draw(this->scoreText);
 	return true;
 }
 
@@ -117,6 +114,13 @@ void GameManager::setup() { // setup du niveau selon un fichier texte
 	}
 	texture.loadFromFile("src/assets/textures/bullet.png");
 	GameObject::textureMap.insert({ 4, texture });
+	for (int i = 1; i <= 2; i++) {
+		std::ostringstream src;
+		src << "src/assets/textures/" << i << "hpSpe.png";
+		std::string strSrc = src.str();
+		texture.loadFromFile(strSrc);
+		GameObject::textureMap.insert({ i+4, texture });
+	}
 
 	std::ifstream level;
 	level.open("src/assets/level files/level1.txt");
@@ -129,9 +133,14 @@ void GameManager::setup() { // setup du niveau selon un fichier texte
 
 		for (int i = 0; i < strLvl.size(); i++) { // Taille de la map '0' représente le vide entre les briques
 			if (strLvl[i] != '0' ) {
-				int j = strLvl[i] - '0';
-				Brick* brick = new Brick(this->window, i%15, i / 15, j);
-				this->objectVector.push_back(brick);
+				if (strLvl[i] == '9') {
+					BoundingBrick* brick = new BoundingBrick(this->window, i % 15, i / 15, 2);
+					this->objectVector.push_back(brick);
+				}else{
+					int j = strLvl[i] - '0';
+					Brick* brick = new Brick(this->window, i % 15, i / 15, j);
+					this->objectVector.push_back(brick);
+				}
 			}
 		}
 	}

@@ -4,6 +4,7 @@
 #include "Bullet.hpp"
 #include "Cannon.hpp"
 #include "Brick.hpp"
+#include "BoundingBrick.hpp"
 #include "Collision.hpp"
 
 
@@ -44,6 +45,30 @@ void Bullet::collideEffect(GameObject* target) { // Collisions avec les briques
 }
 
 
+void Bullet::collideBoundEffect(GameObject* target) { // Collisions avec les briques
+    int random = rand() % 2000;
+    std::cout << this->velocity.y;
+    float targetXMax = target->x + target->w;
+    float targetYMax = target->y + target->h;
+
+    if (target->y < this->y) {
+        this->velocity.y = -this->velocity.y + random;
+    }
+    else if (target->y < this->y + this->h) {
+        this->velocity.y = -this->velocity.y + random;
+
+    }
+    else if (target->x < this->x) {
+        this->velocity.x = -this->velocity.x + random;
+
+    }
+    else if (target->x < this->x + this->w) {
+        this->velocity.x = -this->velocity.x + random;
+    }
+    target->onHit(this);
+}
+
+
 void Bullet::adjustPosition() { // Collision avec l'écran et bullet
     if (this->x < 0) {
         this->x = 0;
@@ -76,6 +101,11 @@ void Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){ // Up
         if (typeid(*target) == typeid(Brick)) {
             if(Collision::circleToRect(this, target)) { // Collisions entre bullet et les briques
                 this->collideEffect(target);
+            }
+        }
+        else if (typeid(*target) == typeid(BoundingBrick)) {
+            if (Collision::circleToRect(this, target)) { // Collisions entre bullet et les bounding briques
+                this->collideBoundEffect(target);
             }
         }
         else if (typeid(*target) == typeid(Bullet)) {
