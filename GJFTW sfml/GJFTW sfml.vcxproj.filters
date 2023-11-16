@@ -18,69 +18,69 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Maths.cpp">
+    <ClCompile Include="src\tools\Maths.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
+    <ClCompile Include="src\InputManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
+    <ClCompile Include="src\GameManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Brick.cpp">
+    <ClCompile Include="src\game objects\Brick.cpp">
       <Filter>Fichiers sources\game object</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
+    <ClCompile Include="src\game objects\Bullet.cpp">
       <Filter>Fichiers sources\game object</Filter>
     </ClCompile>
-    <ClCompile Include="Cannon.cpp">
+    <ClCompile Include="src\game objects\Cannon.cpp">
       <Filter>Fichiers sources\game object</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="src\game objects\GameObject.cpp">
       <Filter>Fichiers sources\game object</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="src\tools\Collision.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Houreglass.cpp">
+    <ClCompile Include="src\game objects\Houreglass.cpp">
       <Filter>Fichiers sources\game object</Filter>
     </ClCompile>
-    <ClCompile Include="ShockWave.cpp">
+    <ClCompile Include="src\game objects\ShockWave.cpp">
       <Filter>Fichiers sources\game object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Brick.hpp">
+    <ClInclude Include="headers\Brick.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.hpp">
+    <ClInclude Include="headers\Bullet.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="ShockWave.hpp">
+    <ClInclude Include="headers\ShockWave.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Maths.hpp">
+    <ClInclude Include="headers\Maths.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.hpp">
+    <ClInclude Include="headers\GameObject.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.hpp">
+    <ClInclude Include="headers\GameManager.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Cannon.hpp">
+    <ClInclude Include="headers\Cannon.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.hpp">
+    <ClInclude Include="headers\InputManager.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.hpp">
+    <ClInclude Include="headers\Collision.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Houreglass.hpp">
+    <ClInclude Include="headers\Houreglass.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

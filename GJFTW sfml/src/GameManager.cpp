@@ -94,7 +94,7 @@ void GameManager::wave() {
 
 void GameManager::setup() { // setup du niveau selon un fichier texte
 	std::ifstream level;
-	level.open("assets/level files/test.txt");
+	level.open("src/assets/level files/test.txt");
 	if (level.is_open()) {
 		std::string strLvl;
 		level >> strLvl;
@@ -120,7 +120,7 @@ void GameManager::addFont(std::string name, const char* path) {
 }
 
 void GameManager::scoreSetup() {
-	this->addFont(std::string("score"), "assets/fonts/arial.ttf");
+	this->addFont(std::string("score"), "src/assets/fonts/arial.ttf");
 	this->scoreLogic = 0;
 	this->scoreText.setFont(this->fontMap.find("score")->second);
 	this->scoreText.setCharacterSize(50);

@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>headers;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -130,29 +133,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Cannon.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Houreglass.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Maths.cpp" />
-    <ClCompile Include="ShockWave.cpp" />
+    <ClCompile Include="src\game objects\Brick.cpp" />
+    <ClCompile Include="src\game objects\Bullet.cpp" />
+    <ClCompile Include="src\game objects\Cannon.cpp" />
+    <ClCompile Include="src\tools\Collision.cpp" />
+    <ClCompile Include="src\GameManager.cpp" />
+    <ClCompile Include="src\game objects\GameObject.cpp" />
+    <ClCompile Include="src\game objects\Houreglass.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\tools\Maths.cpp" />
+    <ClCompile Include="src\game objects\ShockWave.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Brick.hpp" />
-    <ClInclude Include="Bullet.hpp" />
-    <ClInclude Include="Cannon.hpp" />
-    <ClInclude Include="Collision.hpp" />
-    <ClInclude Include="GameManager.hpp" />
-    <ClInclude Include="GameObject.hpp" />
-    <ClInclude Include="Houreglass.hpp" />
-    <ClInclude Include="InputManager.hpp" />
-    <ClInclude Include="Maths.hpp" />
-    <ClInclude Include="ShockWave.hpp" />
+    <ClInclude Include="headers\Brick.hpp" />
+    <ClInclude Include="headers\Bullet.hpp" />
+    <ClInclude Include="headers\Cannon.hpp" />
+    <ClInclude Include="headers\Collision.hpp" />
+    <ClInclude Include="headers\GameManager.hpp" />
+    <ClInclude Include="headers\GameObject.hpp" />
+    <ClInclude Include="headers\Houreglass.hpp" />
+    <ClInclude Include="headers\InputManager.hpp" />
+    <ClInclude Include="headers\Maths.hpp" />
+    <ClInclude Include="headers\ShockWave.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
