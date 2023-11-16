@@ -14,11 +14,14 @@
 #include <Windows.h>
 #include <fstream>
 #include <iostream>
-#include <functional> 
+#include <functional>
+#include <sstream>
 
 std::vector<GameObject*> GameManager::objectVector;
 
 std::map<std::string, sf::Font> GameManager::fontMap = {};
+
+std::map<int, sf::Texture> GameManager::textureMap = {};
 
 GameManager::GameManager(InputManager* inputManager, sf::RenderWindow* window) {
 	this->inputManager = inputManager;
@@ -93,6 +96,16 @@ void GameManager::wave() {
 }
 
 void GameManager::setup() { // setup du niveau selon un fichier texte
+	if (this->textureMap.size() == 0) {
+		sf::Texture texture;
+		for (int i = 1; i <= 3; i++) {
+			std::ostringstream src;
+			src << "src/assets/tiles/" << i << "hp.png";
+			std::string strSrc = src.str();
+			texture.loadFromFile(strSrc);
+			this->textureMap.insert({ i, texture });
+		}
+	}
 	std::ifstream level;
 	level.open("src/assets/level files/test.txt");
 	if (level.is_open()) {
@@ -106,11 +119,11 @@ void GameManager::setup() { // setup du niveau selon un fichier texte
 			if (strLvl[i] != '0' ) {
 				int j = strLvl[i] - '0';
 				Brick* brick = new Brick(this->window, i%15, i / 15, j);
+				brick->sprite.setTexture(this->textureMap.find(j)->second);
 				this->objectVector.push_back(brick);
 			}
 		}
 	}
-	
 }
 
 void GameManager::addFont(std::string name, const char* path) {

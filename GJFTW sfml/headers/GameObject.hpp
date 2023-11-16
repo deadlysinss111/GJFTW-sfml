@@ -17,11 +17,7 @@ public:
 
 	virtual void onHit(GameObject* target);
 	virtual void update(float deltaT, std::vector<GameObject*>* objectVector) {};
-
-	void display(sf::RenderWindow* window);
-
-	sf::Shape* shape;
-	sf::RenderWindow* window;
+	virtual void display(sf::RenderWindow* window);
 
 	sf::Vector2f velocity;
 
@@ -31,4 +27,8 @@ public:
 	float y;
 	float h;
 	float w;
+
+protected:
+	sf::Shape* shape;
+	sf::RenderWindow* window;
 };

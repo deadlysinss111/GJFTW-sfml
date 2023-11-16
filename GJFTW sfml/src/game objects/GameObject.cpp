@@ -22,12 +22,12 @@ GameObject::GameObject(sf::RenderWindow* window, int x, int y, float width, floa
 
 GameObject::GameObject(sf::RenderWindow* window, int x, int y, float radius){
 	this->shape = new sf::CircleShape(radius);
+	this->shape->setOrigin(sf::Vector2f(w / 2, h / 2));
 	this->x = x; this->y = y;
 	this->h = radius; this->w = radius;
 	this->velocity.x = 0.f;
 	this->velocity.y = 0.f;
 	this->window = window;
-	this->shape->setOrigin(sf::Vector2f(w / 2, h / 2));
 }
 
 GameObject::GameObject() {};
