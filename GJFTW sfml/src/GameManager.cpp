@@ -6,6 +6,7 @@
 
 #include "Bullet.hpp"
 #include "Brick.hpp"
+#include "SpecialBrick.hpp"
 #include "Cannon.hpp"
 #include "ShockWave.hpp"
 #include "Houreglass.hpp"
@@ -119,6 +120,12 @@ void GameManager::setup() { // setup du niveau selon un fichier texte
 
 		for (int i = 0; i < strLvl.size(); i++) { // Taille de la map '0' représente le vide entre les briques
 			if (strLvl[i] != '0' ) {
+				//if (strLvl[i] == '9') {
+				//	int j = strLvl[i] - '0';
+				//	SpecialBrick* specialBrick = new SpecialBrick(this->window, i % 15, i / 15, j);
+				//	specialBrick->sprite.setTexture(this->textureMap.find(j)->second);
+				//	this->objectVector.push_back(specialBrick);
+				//}
 				int j = strLvl[i] - '0';
 				Brick* brick = new Brick(this->window, i%15, i / 15, j);
 				brick->sprite.setTexture(this->textureMap.find(j)->second);

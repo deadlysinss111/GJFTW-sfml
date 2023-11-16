@@ -4,6 +4,7 @@
 #include "Bullet.hpp"
 #include "Cannon.hpp"
 #include "Brick.hpp"
+#include "SpecialBrick.hpp"
 #include "Collision.hpp"
 
 
@@ -77,6 +78,11 @@ void Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){ // Up
                 this->collideEffect(target);
             }
         }
+        //else if (typeid(*target) == typeid(SpecialBrick)) {
+        //    if (Collision::circleToRect(this, target)) { // Collisions entre bullet et les briques
+        //        this->collideEffect(target);
+        //    }
+        //}
         else if (typeid(*target) == typeid(Bullet)) {
             if(target != this)
             {

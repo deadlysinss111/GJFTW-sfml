@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\game objects\SpecialBrick.cpp" />
     <ClCompile Include="src\game objects\Brick.cpp" />
     <ClCompile Include="src\game objects\Bullet.cpp" />
     <ClCompile Include="src\game objects\Cannon.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="headers\InputManager.hpp" />
     <ClInclude Include="headers\Maths.hpp" />
     <ClInclude Include="headers\ShockWave.hpp" />
+    <ClInclude Include="headers\SpecialBrick.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

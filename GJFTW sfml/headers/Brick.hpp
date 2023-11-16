@@ -7,7 +7,7 @@ public:
 	~Brick();
 
 	sf::Sprite sprite;
-private:
+protected:
 
 	void onHit(GameObject* target);
 	void update(float deltaT, std::vector<GameObject*>* objectVector);
