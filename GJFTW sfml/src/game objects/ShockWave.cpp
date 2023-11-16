@@ -8,7 +8,7 @@
 #include <iostream>
 
 
-ShockWave::ShockWave(sf::RenderWindow* window, sf::Vector2f* direction, float lifespan) : GameObject(window, window->getSize().x / 2, window->getSize().y, 100, 300) { // Onde de choc qui fait rebondir la bullet
+ShockWave::ShockWave(sf::RenderWindow* window, sf::Vector2f* direction, float lifespan) : GameObject(window, window->getSize().x / 2, window->getSize().y, 300, 100) { // Onde de choc qui fait rebondir la bullet
 	this->lifespan = lifespan;
 	this->shape->setFillColor(sf::Color::Cyan);
 	this->calculateBase(direction);
@@ -26,7 +26,7 @@ void ShockWave::calculateBase(sf::Vector2f* direction) { // Calcul de la base po
 }
 
 void ShockWave::rotateShape() {
-	this->shape->setRotation(Maths::getAngle(&this->v1));
+	this->shape->setRotation(Maths::getAngle(&this->v1)-90);
 }
 
 void ShockWave::move(float deltaT) {
@@ -42,7 +42,8 @@ void ShockWave::update(float deltaT, std::vector<GameObject*>* objectVector) { /
 		if (typeid(*target) == typeid(Bullet) && !std::count(this->collidedObjects.begin(), this->collidedObjects.end(), target)) {
 			
 			if (Collision::circleToRect(target, this)) {
-				target->velocity = -target->velocity;
+				target->velocity.x = this->v2.x * 500;
+				target->velocity.y = this->v2.y * 500;
 				this->collidedObjects.push_back(target);
 			}
 		}
@@ -52,17 +53,3 @@ void ShockWave::update(float deltaT, std::vector<GameObject*>* objectVector) { /
 		this->dead = true;
 	}
 }
-
-//#include "Cannon.hpp"
-//
-//bool ShockWave::circleToRect(GameObject* objOne, GameObject* objTwo) {
-//	if (typeid(*objTwo) == typeid(Bullet) || typeid(*objTwo) == typeid(Cannon)) { return false; }
-//	float disatanceX = std::abs(objOne->x - objTwo->x);
-//	float disatanceY = std::abs(objOne->y - objTwo->y);
-//	if (disatanceX > (objTwo->w / 2 + objOne->h) || disatanceY > (objTwo->h / 2 + objOne->h)) { return false; }
-//	if (disatanceX <= (objTwo->w / 2) || disatanceY <= (objTwo->h / 2)) { return true; }
-//
-//	auto cornerDistance_sq = (disatanceX - objTwo->w / 2) * (disatanceX - objTwo->w / 2) + (disatanceY - objTwo->h / 2) * (disatanceY - objTwo->h / 2);
-//
-//	return (cornerDistance_sq <= (objOne->h * objOne->h));
-//}

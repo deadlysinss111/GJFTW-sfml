@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     {
         window.clear();
 
-        sf::Event event;
+        sf::Event event; 
 
         sf::Time elapsed = clock.restart();
 
