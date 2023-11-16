@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 class InputManager;
 class GameObject;
@@ -38,6 +39,7 @@ private:
 
     static std::vector<GameObject*> objectVector;
     static std::map<std::string, sf::Font> fontMap;
+    static std::map<int, sf::Texture> textureMap;
 
     sf::Text scoreText;
 
