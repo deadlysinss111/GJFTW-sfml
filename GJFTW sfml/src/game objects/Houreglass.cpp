@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-Houreglass::Houreglass(sf::RenderWindow* window, int x, int y, int w, int h, float lifespan) : GameObject(window, x, y, w, h) {
+Houreglass::Houreglass(sf::RenderWindow* window, int x, int y, int w, int h, float lifespan) : GameObject(window, x, y, w, h) { // Barre de rechargement de onde de choc
 	this->lifespan = lifespan;
 	this->remainingLife = h;
 	this->meltingSpeed = (float)h / lifespan;
@@ -17,7 +17,7 @@ Houreglass::~Houreglass() {
 
 }
 
-void Houreglass::melt(float deltaT) {
+void Houreglass::melt(float deltaT) { // Visuel du temps de rechargement
 	float meltThisTic = meltingSpeed * deltaT;
 	this->remainingLife -= meltThisTic;
 	this->lifespan -= deltaT;

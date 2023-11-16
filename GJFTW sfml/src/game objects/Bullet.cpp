@@ -7,7 +7,7 @@
 #include "Collision.hpp"
 
 
-Bullet::Bullet(sf::RenderWindow* window, int x, int y) : GameObject(window, x, y, 25) {
+Bullet::Bullet(sf::RenderWindow* window, int x, int y) : GameObject(window, x, y, 25) { // Couleur bullets
     this->shape->setFillColor(sf::Color::Green);
 };
 
@@ -15,15 +15,13 @@ Bullet::~Bullet() {
     delete this->shape;
 };
 
-void Bullet::move(float deltaT) {
+void Bullet::move(float deltaT) { // Déplacement de bullet
     this->x += this->velocity.x * deltaT;
     this->y += this->velocity.y * deltaT;
     this->shape->setPosition(x, y);
 }
 
-
-
-void Bullet::collideEffect(GameObject* target) {
+void Bullet::collideEffect(GameObject* target) { // Collisions avec les briques
     float targetXMax = target->x + target->w;
     float targetYMax = target->y + target->h;
 
@@ -45,7 +43,7 @@ void Bullet::collideEffect(GameObject* target) {
 }
 
 
-void Bullet::adjustPosition() {
+void Bullet::adjustPosition() { // Collision avec l'écran et bullet
     if (this->x < 0) {
         this->x = 0;
         this->velocity.x = -this->velocity.x;
@@ -66,23 +64,23 @@ void Bullet::adjustPosition() {
     }
 }
 
-void Bullet::setVelocity(sf::Vector2f* v1) {
+void Bullet::setVelocity(sf::Vector2f* v1) { // Mise en place du vecteur vitesse
     this->velocity = *v1;
 }
 
-void Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){
+void Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){ // Update des collsions
     this->move(deltaT);
     for (int i = 0; i < objectVector->size(); i++) {
         auto target = objectVector->at(i);
         if (typeid(*target) == typeid(Brick)) {
-            if(Collision::circleToRect(this, target)) {
+            if(Collision::circleToRect(this, target)) { // Collisions entre bullet et les briques
                 this->collideEffect(target);
             }
         }
         else if (typeid(*target) == typeid(Bullet)) {
             if(target != this)
             {
-                if (Collision::circleToCircle(this, target)) {
+                if (Collision::circleToCircle(this, target)) { // Collisions entre les bullets
                     this->collideEffect(target);
                 }
             }
@@ -91,7 +89,7 @@ void Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){
     this->adjustPosition();
 }
 
-void Bullet::onHit(GameObject* target) {
+void Bullet::onHit(GameObject* target) { // Inverse le vecteur vitesse si collision
     sf::Vector2f vect(-target->velocity.x, -target->velocity.y);
     this->setVelocity(&vect);
 }
