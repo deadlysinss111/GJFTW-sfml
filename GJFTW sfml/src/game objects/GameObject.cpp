@@ -5,10 +5,13 @@
 #include "Brick.hpp"
 #include "Cannon.hpp"
 
+static std::map<int, sf::Texture> textureMap;
 
 
 GameObject::GameObject(sf::RenderWindow* window, int x, int y, float width, float height){
 	this->shape = new sf::RectangleShape(sf::Vector2f(width, height));
+	this->sprite.setOrigin(width / 2, height / 2);
+	this->sprite.setPosition(x, y);
 	this->x = x; this->y = y;
 	this->w = width; this->h = height;
 	this->velocity.x = 0.f;
@@ -42,3 +45,8 @@ void GameObject::display(sf::RenderWindow* window) {
 
 void GameObject::onHit(GameObject* target) {
 }
+
+void GameObject::setTexture(sf::Texture* texture) {
+	this->sprite.setTexture(*texture);
+}
+

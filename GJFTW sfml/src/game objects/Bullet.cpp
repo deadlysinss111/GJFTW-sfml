@@ -9,6 +9,7 @@
 
 Bullet::Bullet(sf::RenderWindow* window, int x, int y) : GameObject(window, x, y, 25) {
     this->shape->setFillColor(sf::Color::Green);
+    this->sprite.setTexture(this->textureMap.find(4)->second);
 };
 
 Bullet::~Bullet() {
@@ -89,9 +90,14 @@ void Bullet::update(float deltaT, std::vector<GameObject*>* objectVector){
         }
     }
     this->adjustPosition();
+    this->sprite.setPosition(this->shape->getPosition());
 }
 
 void Bullet::onHit(GameObject* target) {
     sf::Vector2f vect(-target->velocity.x, -target->velocity.y);
     this->setVelocity(&vect);
+}
+
+void Bullet::display(sf::RenderWindow* window) {
+    window->draw(this->sprite);
 }

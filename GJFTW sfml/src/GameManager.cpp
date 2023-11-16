@@ -21,8 +21,6 @@ std::vector<GameObject*> GameManager::objectVector;
 
 std::map<std::string, sf::Font> GameManager::fontMap = {};
 
-std::map<int, sf::Texture> GameManager::textureMap = {};
-
 GameManager::GameManager(InputManager* inputManager, sf::RenderWindow* window) {
 	this->inputManager = inputManager;
 	this->window = window;
@@ -72,7 +70,7 @@ void GameManager::insert(GameObject* object){
 void GameManager::shoot() {
 	if(this->currentBullets < this->maxBullets && this->bulletCooldown <= 0)
 	{
-		Bullet* bullet = new Bullet(this->window, this->window->getSize().x / 2, this->window->getSize().y);
+		Bullet* bullet = new Bullet(this->window, this->window->getSize().x / 2, this->window->getSize().y + 40);
 		sf::Vector2f mouseVect(sf::Vector2f(sf::Mouse::getPosition().x - bullet->x, sf::Mouse::getPosition().y - bullet->y));
 		Maths::normalized(&mouseVect);
 		mouseVect.x *= 500;
@@ -96,16 +94,17 @@ void GameManager::wave() {
 }
 
 void GameManager::setup() { // setup du niveau selon un fichier texte
-	if (this->textureMap.size() == 0) {
-		sf::Texture texture;
-		for (int i = 1; i <= 3; i++) {
-			std::ostringstream src;
-			src << "src/assets/tiles/" << i << "hp.png";
-			std::string strSrc = src.str();
-			texture.loadFromFile(strSrc);
-			this->textureMap.insert({ i, texture });
-		}
+	sf::Texture texture;
+	for (int i = 1; i <= 3; i++) {
+		std::ostringstream src;
+		src << "src/assets/textures/" << i << "hp.png";
+		std::string strSrc = src.str();
+		texture.loadFromFile(strSrc);
+		GameObject::textureMap.insert({ i, texture });
 	}
+	texture.loadFromFile("src/assets/textures/bullet.png");
+	GameObject::textureMap.insert({ 4, texture });
+
 	std::ifstream level;
 	level.open("src/assets/level files/test.txt");
 	if (level.is_open()) {
@@ -119,7 +118,6 @@ void GameManager::setup() { // setup du niveau selon un fichier texte
 			if (strLvl[i] != '0' ) {
 				int j = strLvl[i] - '0';
 				Brick* brick = new Brick(this->window, i%15, i / 15, j);
-				brick->sprite.setTexture(this->textureMap.find(j)->second);
 				this->objectVector.push_back(brick);
 			}
 		}

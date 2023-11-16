@@ -18,9 +18,12 @@ public:
 	virtual void onHit(GameObject* target);
 	virtual void update(float deltaT, std::vector<GameObject*>* objectVector) {};
 	virtual void display(sf::RenderWindow* window);
+	void setTexture(sf::Texture*);
 
 	sf::Vector2f velocity;
 
+	static std::map<int, sf::Texture> textureMap;
+	
 	bool dead;
 
 	float x;
@@ -31,4 +34,5 @@ public:
 protected:
 	sf::Shape* shape;
 	sf::RenderWindow* window;
+	sf::Sprite sprite;
 };

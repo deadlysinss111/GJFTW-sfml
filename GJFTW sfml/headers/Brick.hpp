@@ -5,8 +5,6 @@ class Brick : public GameObject {
 public:
 	Brick(sf::RenderWindow* window, int x, int y, int hp);
 	~Brick();
-
-	sf::Sprite sprite;
 private:
 
 	void onHit(GameObject* target);
@@ -14,6 +12,4 @@ private:
 	void display(sf::RenderWindow* window);
 
 	int hp;
-
-	static std::map<int, sf::Color> colorMap;
 };

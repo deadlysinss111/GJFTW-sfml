@@ -17,5 +17,5 @@ private:
 	void collideEffect(GameObject*);
 
 	void update(float deltaT, std::vector<GameObject*>* objectVector);
-
+	void display(sf::RenderWindow* window);
 };
