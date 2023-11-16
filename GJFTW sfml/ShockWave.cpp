@@ -21,7 +21,7 @@ ShockWave::~ShockWave() {
 
 void ShockWave::calculateBase(sf::Vector2f* direction) {
 	this->v1 = sf::Vector2f(direction->x - GetSystemMetrics(SM_CXSCREEN) / 2, GetSystemMetrics(SM_CYSCREEN) - direction->y);
-	//Maths::normalized(&v1);
+	Maths::normalized(&v1);
 	this->v2 = sf::Vector2f(this->v1.x, - this->v1.y);
 }
 
