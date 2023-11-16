@@ -51,12 +51,23 @@ bool GameManager::manage(float deltaT) {
 				}
 				else if (typeid(*objectVector.at(i)) == typeid(Brick)) {
 					this->scoreUpdate(50);
+					int skip = 0;
+					for (int j = 0; j < this->objectVector.size(); j++) {
+						if (typeid(*objectVector.at(j)) == typeid(Brick)) {
+							skip +=1;
+						}
+					}
+					
+					if(skip <= 2){
+						this->scoreText.setPosition(this->window->getSize().x / 2 - 400, this->window->getSize().y / 2 - 150);
+						this->scoreText.setScale(4, 4);
+						this->window->draw(this->scoreText);
+						this->window->display();
+						Sleep(2000);
+						return false;
+					}
 				}
 				objectVector.erase(objectVector.begin() + i);
-				if (this->objectVector.size() <= 1) { //////////////////////////////////////// terrifiant, a changer asap
-					this->window->draw(this->scoreText);
-					return false;
-				}
 			}
 		}
 		this->window->draw(this->scoreText);
@@ -108,7 +119,7 @@ void GameManager::setup() { // setup du niveau selon un fichier texte
 	GameObject::textureMap.insert({ 4, texture });
 
 	std::ifstream level;
-	level.open("src/assets/level files/test.txt");
+	level.open("src/assets/level files/level1.txt");
 	if (level.is_open()) {
 		std::string strLvl;
 		level >> strLvl;
